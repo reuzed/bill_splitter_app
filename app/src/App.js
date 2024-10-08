@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+
+import { useState, useEffect } from "react";
+import SimpleForm from "./SimpleForm";
 
 function App() {
+  const [data, setData] = useState("");
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/transactions/1")
+      .then((response) => response.json())
+      .then((json) => setData(json))
+      .catch((error) => console.error(error));
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="App">Here is the json: {JSON.stringify(data)}</div>
+      <SimpleForm></SimpleForm>
+    </>
   );
 }
 
