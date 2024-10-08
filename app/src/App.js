@@ -1,20 +1,28 @@
 import "./App.css";
 
 import { useState, useEffect } from "react";
-import SimpleForm from "./SimpleForm";
+
+import ViewTransactionsPage from "./ViewTransactionsPage";
+import NewUserPage from "./NewUserPage";
+import NewTransactionPage from "./NewTransactionPage";
+import ViewBalancesPage from "./ViewBalancesPage";
+
+import PageSelector from "./PageSelector";
+
+let pages = {
+  view_balances: <ViewBalancesPage />,
+  view_transactions: <ViewTransactionsPage />,
+  new_user: <NewUserPage />,
+  new_transaction: <NewTransactionPage />,
+};
 
 function App() {
-  const [data, setData] = useState("");
-  useEffect(() => {
-    fetch("http://127.0.0.1:5000/transactions/1")
-      .then((response) => response.json())
-      .then((json) => setData(json))
-      .catch((error) => console.error(error));
-  }, []);
+  const [page, setPage] = useState("view_transactions");
+
   return (
     <>
-      <div className="App">Here is the json: {JSON.stringify(data)}</div>
-      <SimpleForm></SimpleForm>
+      <PageSelector setPage={setPage} />
+      {pages[page]}
     </>
   );
 }
