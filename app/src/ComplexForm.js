@@ -1,18 +1,23 @@
-import { TextField, Box, ListItemButton, List, ListItem } from "@mui/material";
-import { useState } from "react";
+import {
+  TextField,
+  Box,
+  ListItemButton,
+  List,
+  ListItem,
+  Alert,
+} from "@mui/material";
+import CheckIcon from "@mui/icons-material/Check";
+import { useEffect, useState } from "react";
 import "./App.css";
+import { postJson } from "./API_utils";
 
-function sendRequest(API_domain, json_data) {
-  fetch(API_domain, {
-    method: "POST",
-    body: JSON.stringify(json_data),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  }).catch((error) => console.error(error));
-}
-
-function handleSend(API_domain, questions, responses) {
+function handleSend(
+  API_path,
+  questions,
+  responses,
+  resetResponses,
+  setJustSubmitted
+) {
   let question_count = responses.length;
   let json_data = {};
   for (let i = 0; i < question_count; i++) {
@@ -22,15 +27,27 @@ function handleSend(API_domain, questions, responses) {
     json_data[questions[i]["property"]] = responses[i];
   }
   return () => {
-    sendRequest(API_domain, json_data);
+    setJustSubmitted(true);
+    resetResponses();
+    postJson(API_path, json_data);
   };
 }
 
-function SimpleForm({ API_domain, questions }) {
+function SimpleForm({ API_path, questions }) {
   //Takes an API_domain to which the form results will be passed on
   //Takes a list of question,property dicts, forms this into a question list
+  const [justSubmitted, setJustSubmitted] = useState(false);
+  useEffect(() => {
+    if (justSubmitted) {
+      setTimeout(() => setJustSubmitted(false), 3000);
+    }
+  }, [justSubmitted]);
+
   const question_count = questions.length;
   const [responses, setResponses] = useState(Array(question_count).fill(""));
+  const resetResponses = () => {
+    setResponses(Array(question_count).fill(""));
+  };
 
   function setResponse(i, value) {
     let copied_responses = structuredClone(responses);
@@ -57,10 +74,21 @@ function SimpleForm({ API_domain, questions }) {
             <ListItem>{text_field}</ListItem>
           ))}
           <ListItemButton
-            onClick={handleSend(API_domain, questions, responses)}
+            onClick={handleSend(
+              API_path,
+              questions,
+              responses,
+              resetResponses,
+              setJustSubmitted
+            )}
           >
             Click here to submit the form.
           </ListItemButton>
+          {justSubmitted && (
+            <Alert icon={<CheckIcon />} severity="success">
+              Successfully Submitted.
+            </Alert>
+          )}
         </List>
       </Box>
     </Box>

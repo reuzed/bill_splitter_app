@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import { Table, TableRow, TableCell } from "@mui/material";
+import { getJson } from "./API_utils";
 
 function ViewTransactionsPage() {
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/transactions")
-      .then((response) => response.json())
-      .then((json) => setData(json))
-      .catch((error) => console.error(error));
+    getJson("transactions", setData);
   }, []);
   let listItems = data.map((element) => (
     <TableRow>

@@ -30,8 +30,23 @@ def test_add():
     con = sqlite3.connect(DATABASE)
     cur = con.cursor()
 
-    cur.execute(
-        "INSERT INTO transactions VALUES(?,?,?,?)", [17, 'Reuben', '1000', 'Today']
+    cur.executemany(
+        "INSERT INTO users VALUES(?,?,?)", [
+            [101, 'Reuben', '123'],
+            [309, 'Robin', '456'],
+            [607, 'Ray', '789']
+        ]
+    )
+    
+    cur.executemany(
+        "INSERT INTO transactions VALUES(?,?,?,?)", [
+            [17, 'Reuben', '1000', 'Today'],
+            [18, 'Robin', '300', 'Today'],
+            [19, 'Ray', '200', 'Today'],
+            [20, 'Reuben', '600', 'Today'],
+            [21, 'Reuben', '400', 'Today'],
+            [22, 'Robin', '100', 'Today']
+        ]
     )
 
     con.commit()
@@ -39,3 +54,4 @@ def test_add():
 
 if __name__ == '__main__':
     setup()
+    test_add()

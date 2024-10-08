@@ -1,16 +1,24 @@
+import { useEffect, useState } from "react";
 import SimpleForm from "./SimpleForm";
 
-let API_DOMAIN = "http://127.0.0.1:5000/users";
+import { postJson } from "./API_utils";
+let API_path = "users";
 let questions = [
   { name: "Name", property: "name" },
   { name: "Bank Details", property: "bank_details" },
 ];
 
 function NewUserPage() {
+  const [results, setResults] = useState("");
+  useEffect(() => {
+    if (results) {
+      postJson(API_path, results);
+    }
+  }, [results]);
   return (
     <>
       <h1>New user page</h1>
-      <SimpleForm API_domain={API_DOMAIN} questions={questions} />
+      <SimpleForm questions={questions} setResults={setResults} />
     </>
   );
 }

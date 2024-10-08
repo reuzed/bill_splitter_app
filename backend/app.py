@@ -8,19 +8,43 @@ DATABASE = 'bill_splitter.db'
 app = Flask(__name__)
 CORS(app) 
 
-sample_transactions = [
-{'name':'reuben', 'amount':100},
-{'name':'randolph', 'amount':25}
-]
+def make_select_query(query):
+    con = sqlite3.connect(DATABASE)
+    cur = con.cursor()
+    res = cur.execute(query)
+    data = res.fetchall()
+    con.close()
+    return data
+
+def make_insert_query(query, data):
+    con = sqlite3.connect(DATABASE)
+    cur = con.cursor()
+    cur.execute(
+        query, data
+    )
+    con.commit()
+    con.close()
+
+def get_transaction_ids():
+    transaction_ids = make_select_query(
+        'SELECT transaction_id FROM transactions'
+    )
+    transaction_ids = list(map(lambda x:x[0], transaction_ids))
+    return transaction_ids
+
+def get_user_ids():
+    user_ids = make_select_query(
+        'SELECT user_id FROM users'
+    )
+    user_ids = list(map(lambda x:x[0], user_ids))
+    return user_ids
 
 @app.route('/')
 def hello():
-    return "<h1>Hello</h1>"
+    return "<h1>Hello! This is the default route.</h1>" + str(get_transaction_ids())
 
-TRANSACTION_ID = 0
 @app.route('/transactions', methods=['GET', 'POST'])
 def transactions():
-    print("got a request")
     if request.method == 'GET':
         con = sqlite3.connect(DATABASE)
         cur = con.cursor()
@@ -32,7 +56,7 @@ def transactions():
         return data
         
     if request.method == 'POST':
-        global TRANSACTION_ID
+        TRANSACTION_ID = max(get_transaction_ids()) + 1
         data = request.json
         payer, amount, date = data['payer'],data['amount'],data['date']
         con = sqlite3.connect(DATABASE)
@@ -40,28 +64,29 @@ def transactions():
         cur.execute(
             'INSERT INTO transactions VALUES(?,?,?,?)', [TRANSACTION_ID, payer, amount, date]
         )
-        TRANSACTION_ID += 1
         con.commit()
         con.close()
         print(data)
         return data
    
-USER_ID = 0 
 @app.route('/users', methods=['GET','POST'])
 def users():
     if request.method == 'POST':
-        global USER_ID
+        USER_ID = max(get_user_ids())+1
         data = request.json
         name, bank_details = data['name'],data['bank_details']
+        make_insert_query('INSERT INTO users VALUES(?,?,?)', [USER_ID, name, bank_details])
+        print(data)
+        return data
+    
+    if request.method == 'GET':
         con = sqlite3.connect(DATABASE)
         cur = con.cursor()
-        cur.execute(
-            'INSERT INTO users VALUES(?,?,?)', [USER_ID, name, bank_details]
+        res = cur.execute(
+            "SELECT name FROM users"
         )
-        USER_ID += 1
-        con.commit()
+        data = res.fetchall()
         con.close()
-        print(data)
         return data
 
     
