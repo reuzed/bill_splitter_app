@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/bill-splitter/static/css/main.91bb3083.css",
+    "main.js": "/bill-splitter/static/js/main.0cd4df86.js",
+    "static/js/453.a6a97343.chunk.js": "/bill-splitter/static/js/453.a6a97343.chunk.js",
+    "index.html": "/bill-splitter/index.html",
+    "main.91bb3083.css.map": "/bill-splitter/static/css/main.91bb3083.css.map",
+    "main.0cd4df86.js.map": "/bill-splitter/static/js/main.0cd4df86.js.map",
+    "453.a6a97343.chunk.js.map": "/bill-splitter/static/js/453.a6a97343.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.91bb3083.css",
+    "static/js/main.0cd4df86.js"
+  ]
+}
