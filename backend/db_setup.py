@@ -54,4 +54,4 @@ def test_add():
 
 if __name__ == '__main__':
     setup()
-    test_add()
+    #test_add()

@@ -1,11 +1,13 @@
 import {
   TextField,
   Box,
+  Button,
   ListItemButton,
   List,
   ListItem,
   Alert,
 } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import CheckIcon from "@mui/icons-material/Check";
 import { useEffect, useState } from "react";
 import "./App.css";
@@ -66,13 +68,15 @@ function SimpleForm({ questions, setResults }) {
   });
 
   return (
-    <Box>
-      <Box>
-        <List>
-          {text_fields.map((text_field) => (
-            <ListItem>{text_field}</ListItem>
-          ))}
-          <ListItemButton
+    <Grid container direction="column" alignItems="center" justify="center">
+      <List style={{ border: "0.2px solid gray" }}>
+        {text_fields.map((text_field) => (
+          <ListItem>{text_field}</ListItem>
+        ))}
+        <ListItem>
+          <Button
+            variant="contained"
+            fullWidth
             onClick={handleSend(
               questions,
               setResults,
@@ -81,16 +85,16 @@ function SimpleForm({ questions, setResults }) {
               setJustSubmitted
             )}
           >
-            Click here to submit the form.
-          </ListItemButton>
-          {justSubmitted && (
-            <Alert icon={<CheckIcon />} severity="success">
-              Successfully Submitted.
-            </Alert>
-          )}
-        </List>
-      </Box>
-    </Box>
+            Submit
+          </Button>
+        </ListItem>
+        {justSubmitted && (
+          <Alert icon={<CheckIcon />} severity="success">
+            Successfully Submitted.
+          </Alert>
+        )}
+      </List>
+    </Grid>
   );
 }
 

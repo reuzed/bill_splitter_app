@@ -1,9 +1,22 @@
+body{
+  background: white;
+}
+
+.mainPage{
+  width:80%;
+  height:100vh;
+  background: white;
+  margin:auto;
+  margin-top: 0;
+}
+
 .pageSelector{
   width: 100%;
+  height:4em;
   text-align: center;
   align-items: center;
   align-content: center;
-  background: #EEE;
+  background: green;
 }
 
 .centerWide{

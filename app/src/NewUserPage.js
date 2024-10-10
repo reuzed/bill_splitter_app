@@ -17,7 +17,7 @@ function NewUserPage() {
   }, [results]);
   return (
     <>
-      <h1>New user page</h1>
+      <h1>Add a New User:</h1>
       <SimpleForm questions={questions} setResults={setResults} />
     </>
   );

@@ -8,6 +8,7 @@ import NewTransactionPage from "./NewTransactionPage";
 import ViewBalancesPage from "./ViewBalancesPage";
 
 import PageSelector from "./PageSelector";
+import { Box } from "@mui/material";
 
 let pages = {
   view_balances: <ViewBalancesPage />,
@@ -22,7 +23,7 @@ function App() {
   return (
     <>
       <PageSelector setPage={setPage} />
-      {pages[page]}
+      <Box className="mainPage">{pages[page]}</Box>
     </>
   );
 }
