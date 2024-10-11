@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/bill_splitter_app/static/css/main.91bb3083.css",
-    "main.js": "/bill_splitter_app/static/js/main.e62bd442.js",
+    "main.js": "/bill_splitter_app/static/js/main.0cdf6d58.js",
     "static/js/453.a6a97343.chunk.js": "/bill_splitter_app/static/js/453.a6a97343.chunk.js",
     "index.html": "/bill_splitter_app/index.html",
     "main.91bb3083.css.map": "/bill_splitter_app/static/css/main.91bb3083.css.map",
-    "main.e62bd442.js.map": "/bill_splitter_app/static/js/main.e62bd442.js.map",
+    "main.0cdf6d58.js.map": "/bill_splitter_app/static/js/main.0cdf6d58.js.map",
     "453.a6a97343.chunk.js.map": "/bill_splitter_app/static/js/453.a6a97343.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.91bb3083.css",
-    "static/js/main.e62bd442.js"
+    "static/js/main.0cdf6d58.js"
   ]
 }
