@@ -1,19 +1,20 @@
 import {
   TextField,
   Box,
+  Button,
   ListItemButton,
   List,
   ListItem,
   Alert,
 } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import CheckIcon from "@mui/icons-material/Check";
 import { useEffect, useState } from "react";
 import "./App.css";
-import { postJson } from "./API_utils";
 
 function handleSend(
-  API_path,
   questions,
+  setResults,
   responses,
   resetResponses,
   setJustSubmitted
@@ -29,11 +30,11 @@ function handleSend(
   return () => {
     setJustSubmitted(true);
     resetResponses();
-    postJson(API_path, json_data);
+    setResults(json_data);
   };
 }
 
-function SimpleForm({ API_path, questions }) {
+function SimpleForm({ questions, setResults }) {
   //Takes an API_domain to which the form results will be passed on
   //Takes a list of question,property dicts, forms this into a question list
   const [justSubmitted, setJustSubmitted] = useState(false);
@@ -67,31 +68,33 @@ function SimpleForm({ API_path, questions }) {
   });
 
   return (
-    <Box>
-      <Box>
-        <List>
-          {text_fields.map((text_field) => (
-            <ListItem>{text_field}</ListItem>
-          ))}
-          <ListItemButton
+    <Grid container direction="column" alignItems="center" justify="center">
+      <List style={{ border: "0.2px solid gray" }}>
+        {text_fields.map((text_field) => (
+          <ListItem>{text_field}</ListItem>
+        ))}
+        <ListItem>
+          <Button
+            variant="contained"
+            fullWidth
             onClick={handleSend(
-              API_path,
               questions,
+              setResults,
               responses,
               resetResponses,
               setJustSubmitted
             )}
           >
-            Click here to submit the form.
-          </ListItemButton>
-          {justSubmitted && (
-            <Alert icon={<CheckIcon />} severity="success">
-              Successfully Submitted.
-            </Alert>
-          )}
-        </List>
-      </Box>
-    </Box>
+            Submit
+          </Button>
+        </ListItem>
+        {justSubmitted && (
+          <Alert icon={<CheckIcon />} severity="success">
+            Successfully Submitted.
+          </Alert>
+        )}
+      </List>
+    </Grid>
   );
 }
 
