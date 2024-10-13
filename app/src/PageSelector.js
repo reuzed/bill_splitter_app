@@ -1,9 +1,12 @@
-import { Box, Button, IconButton } from "@mui/material";
+import { Box, Button, IconButton, TextField, Checkbox } from "@mui/material";
 
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import AddIcon from "@mui/icons-material/Add";
 import BalanceIcon from "@mui/icons-material/Balance";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
+import { useEffect, useState } from "react";
+
+import "./App.css";
 
 const page_data = [
   { page_name: "new_user", label: "New User", icon: <PersonAddIcon /> },
@@ -16,7 +19,14 @@ const page_data = [
   { page_name: "view_balances", label: "View Balances", icon: <BalanceIcon /> },
 ];
 
-function PageSelector({ setPage }) {
+function PageSelector({ setPage, splitter_name, setSplitter_name }) {
+  const [tempName, setTempName] = useState(splitter_name);
+  const [editable, setEditable] = useState(true); //This is ! of what it should be but can't be bothered to fix
+  useEffect(() => {
+    if (editable) {
+      setSplitter_name(tempName);
+    }
+  }, [editable]);
   return (
     <Box className="pageSelector">
       {page_data.map((page) => (
@@ -24,14 +34,22 @@ function PageSelector({ setPage }) {
           {page["icon"]}
         </IconButton>
       ))}
+      <Checkbox
+        color="black"
+        checked={editable}
+        onChange={(event) => setEditable(event.target.checked)}
+      />
+      <input
+        className={
+          editable ? "transparentInput blackText" : "transparentInput redText"
+        }
+        disabled={editable}
+        type="text"
+        value={tempName}
+        onChange={(event) => setTempName(event.target.value)}
+      />
     </Box>
   );
-}
-
-{
-  /* <Button onClick={() => setPage(page["page_name"])}>
-          {page["label"]}
-        </Button> */
 }
 
 export default PageSelector;

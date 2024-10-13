@@ -1,5 +1,4 @@
-const BACKEND_PATH = "https://reuzed.pythonanywhere.com";
-//"http://127.0.0.1:5000";
+const BACKEND_PATH = "http://127.0.0.1:5000";
 
 export function getJson(path, setter) {
   fetch(BACKEND_PATH + "/" + path)
@@ -22,5 +21,11 @@ export function postJson(path, json) {
     headers: {
       "Content-type": "application/json; charset=UTF-8",
     },
+  }).catch((error) => console.error(error));
+}
+
+export function deleteRequest(path) {
+  fetch(BACKEND_PATH + "/" + path, {
+    method: "DELETE",
   }).catch((error) => console.error(error));
 }

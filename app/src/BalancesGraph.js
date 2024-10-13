@@ -57,7 +57,7 @@ function node(value, x, y) {
   );
 }
 
-function sortBalances(names, balances) {
+function sortBalances(users, balances) {
   //takes the list of balances and sorts into those who are positive negative and neutral
 
   let balance_values = Object.values(balances);
@@ -74,9 +74,9 @@ function sortBalances(names, balances) {
     min_val = 1;
   }
 
-  names.forEach((name) => {
-    let balance = balances[name];
-    let data = { name: name, balance: balance };
+  users.forEach((user) => {
+    let balance = balances[user.user_id];
+    let data = { user_id: user.user_id, name: user.name, balance: balance };
     if (balance === 0) {
       data.scaled_balance = 0;
       neutralBalances.push(data);
@@ -190,9 +190,9 @@ function placeNodeLabels(balances, xpos, dx, anchor) {
   return labels;
 }
 
-function BalancesGraph({ names, balances }) {
+function BalancesGraph({ users, balances }) {
   let [positiveBalances, negativeBalances, neutralBalances] = sortBalances(
-    names,
+    users,
     balances
   );
   let height = max(positiveBalances.length, negativeBalances.length);
