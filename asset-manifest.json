@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/bill_splitter_app/static/css/main.91bb3083.css",
-    "main.js": "/bill_splitter_app/static/js/main.0cdf6d58.js",
+    "main.css": "/bill_splitter_app/static/css/main.a53b1c37.css",
+    "main.js": "/bill_splitter_app/static/js/main.73f7da19.js",
     "static/js/453.a6a97343.chunk.js": "/bill_splitter_app/static/js/453.a6a97343.chunk.js",
     "index.html": "/bill_splitter_app/index.html",
-    "main.91bb3083.css.map": "/bill_splitter_app/static/css/main.91bb3083.css.map",
-    "main.0cdf6d58.js.map": "/bill_splitter_app/static/js/main.0cdf6d58.js.map",
+    "main.a53b1c37.css.map": "/bill_splitter_app/static/css/main.a53b1c37.css.map",
+    "main.73f7da19.js.map": "/bill_splitter_app/static/js/main.73f7da19.js.map",
     "453.a6a97343.chunk.js.map": "/bill_splitter_app/static/js/453.a6a97343.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.91bb3083.css",
-    "static/js/main.0cdf6d58.js"
+    "static/css/main.a53b1c37.css",
+    "static/js/main.73f7da19.js"
   ]
 }
