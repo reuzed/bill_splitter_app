@@ -1,4 +1,5 @@
-const BACKEND_PATH = "http://127.0.0.1:5000";
+const BACKEND_PATH = "https://reuzed.pythonanywhere.com";
+//"http://127.0.0.1:5000";
 
 export function getJson(path, setter) {
   fetch(BACKEND_PATH + "/" + path)
