@@ -33,6 +33,12 @@ input[type="text"].transparentInput{
   background: green;
 }
 
+.centering{
+  text-align: center;
+  align-items: center;
+  align-content: center;
+}
+
 .centerWide{
   background: #EEE;
   width: 100%;

@@ -1,10 +1,14 @@
-import { Box, Button, IconButton, TextField, Checkbox } from "@mui/material";
+import { Checkbox, IconButton, Tooltip, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import AddIcon from "@mui/icons-material/Add";
 import BalanceIcon from "@mui/icons-material/Balance";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import { useEffect, useState } from "react";
+
+import EditIcon from "@mui/icons-material/Edit";
+import EditOffIcon from "@mui/icons-material/EditOff";
 
 import "./App.css";
 
@@ -28,27 +32,41 @@ function PageSelector({ setPage, splitter_name, setSplitter_name }) {
     }
   }, [editable]);
   return (
-    <Box className="pageSelector">
-      {page_data.map((page) => (
-        <IconButton onClick={() => setPage(page["page_name"])}>
-          {page["icon"]}
-        </IconButton>
-      ))}
-      <Checkbox
-        color="black"
-        checked={editable}
-        onChange={(event) => setEditable(event.target.checked)}
-      />
-      <input
-        className={
-          editable ? "transparentInput blackText" : "transparentInput redText"
-        }
-        disabled={editable}
-        type="text"
-        value={tempName}
-        onChange={(event) => setTempName(event.target.value)}
-      />
-    </Box>
+    <Grid container className="pageSelector">
+      <Grid size={2}></Grid>
+      <Grid size={8}>
+        {page_data.map((page) => (
+          <Tooltip title={page.label}>
+            <IconButton onClick={() => setPage(page.page_name)}>
+              {page.icon}
+            </IconButton>
+          </Tooltip>
+        ))}
+      </Grid>
+      <Grid size={2}>
+        <Grid container direction="vertical" justifyContent={"left"}>
+          <Grid item>
+            <Typography variant="body2">Splitter Name:</Typography>
+          </Grid>
+          <Grid item>
+            <IconButton color="black" onClick={() => setEditable(!editable)}>
+              {editable ? <EditOffIcon /> : <EditIcon />}
+            </IconButton>
+            <input
+              className={
+                editable
+                  ? "transparentInput blackText"
+                  : "transparentInput redText"
+              }
+              disabled={editable}
+              type="text"
+              value={tempName}
+              onChange={(event) => setTempName(event.target.value)}
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 }
 

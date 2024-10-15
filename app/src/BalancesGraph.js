@@ -1,7 +1,8 @@
 import { abs, floor, max, min } from "mathjs";
 
 const NODE_RADIUS = 20;
-const MARGIN = 100;
+const HORIZONTAL_MARGIN = 100; // Bigger to accomodate names
+const VERTICAL_MARGIN = 40;
 const SPACING = 30;
 const ARROW_LENGTH = 100;
 
@@ -9,25 +10,26 @@ const TEXT_SHIFT = 3;
 const BORDER = 3;
 
 //Derived constants
-const LEFT_COLUMN = MARGIN + NODE_RADIUS;
-const RIGHT_COLUMN = MARGIN + 3 * NODE_RADIUS + ARROW_LENGTH;
+const LEFT_COLUMN = HORIZONTAL_MARGIN + NODE_RADIUS;
+const RIGHT_COLUMN = HORIZONTAL_MARGIN + 3 * NODE_RADIUS + ARROW_LENGTH;
 
 function yGridPos(n) {
   //returns the nth y coordinate in the grid
-  return MARGIN + (2 * NODE_RADIUS + SPACING) * n + NODE_RADIUS;
+  return VERTICAL_MARGIN + (2 * NODE_RADIUS + SPACING) * n + NODE_RADIUS;
 }
 
 function neutralGridPos(height) {
   //Returns the y coord of the neutral elements
-  return yGridPos(height - 1) + 2 * NODE_RADIUS + 2 * MARGIN;
+  return yGridPos(height - 1) + 2 * NODE_RADIUS + 2 * VERTICAL_MARGIN;
 }
 
 function getWidth() {
-  return ARROW_LENGTH + 4 * NODE_RADIUS + 2 * MARGIN;
+  return ARROW_LENGTH + 4 * NODE_RADIUS + 2 * HORIZONTAL_MARGIN;
 }
 
 function getHeight(height) {
-  return neutralGridPos(height) + NODE_RADIUS + MARGIN;
+  return yGridPos(height - 1) + NODE_RADIUS + VERTICAL_MARGIN;
+  //return neutralGridPos(height) + NODE_RADIUS + MARGIN;
 }
 function colorMapping(value) {
   //0 returns gray
