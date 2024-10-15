@@ -50,7 +50,13 @@ function MiniTable({ shares, users }) {
   );
 }
 
-function TransactionRow({ users, transaction, setRerender, isMobile }) {
+function TransactionRow({
+  users,
+  transaction,
+  setRerender,
+  isMobile,
+  splitter_name,
+}) {
   const [open, setOpen] = useState(false);
   return (
     <TableRow>
