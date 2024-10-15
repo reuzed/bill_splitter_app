@@ -52,8 +52,8 @@ function transformForm(formData) {
   let payer_id = formData["payer_id"];
   formData["payer_id"] = Number(payer_id);
   let shares = formData["shares"];
-  if (shares["payer_id"] === undefined) {
-    shares["payer_id"] = 0;
+  if (shares[payer_id] === undefined) {
+    shares[payer_id] = 0;
   }
   let shareEntries = Object.entries(shares);
   shareEntries = shareEntries.map((pair) => [pair[0], Number(pair[1])]);
