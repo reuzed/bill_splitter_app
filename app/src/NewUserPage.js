@@ -179,7 +179,8 @@ function NewUserPage({ splitter_name, isMobile }) {
 
   return (
     <>
-      <Typography variant="h3">Add a New User:</Typography>
+      {/* <Typography variant="h3">Add a New User:</Typography> */}
+      <h1>Add a New User:</h1>
       <Typography variant="body">
         Enter your details below. Name is required, but bank details can be
         included if you want to be paid back more easily. (Don't enter bank

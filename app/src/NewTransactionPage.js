@@ -206,7 +206,7 @@ function LastDetails({ formData, addFormProperty }) {
           </LocalizationProvider>
         </FormControl>
       </ListItem>
-      <ListItem>See below!</ListItem>
+      <ListItem></ListItem>
     </List>
   );
 }

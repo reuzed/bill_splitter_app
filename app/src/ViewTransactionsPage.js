@@ -77,7 +77,7 @@ function TransactionRow({ users, transaction, setRerender, isMobile }) {
                 "trying to delete a transaction with id " +
                   transaction.transaction_id
               );
-              deleteTransaction(transaction.transaction_id, "debug");
+              deleteTransaction(transaction.transaction_id, splitter_name);
               setRerender((x) => x + 1);
             }}
           >
@@ -106,6 +106,7 @@ function ViewTransactionsPage({ splitter_name, isMobile }) {
       transaction={transaction}
       setRerender={setRerender}
       isMobile={isMobile}
+      splitter_name={splitter_name}
     />
   ));
   return (
