@@ -25,7 +25,7 @@ let pages = {
 
 function App() {
   const [page, setPage] = useState("view_transactions");
-  const [splitter_name, setSplitter_name] = useState("debug");
+  const [splitter_name, setSplitter_name] = useState("wasen");
   return (
     <>
       <PageSelector
