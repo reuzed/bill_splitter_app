@@ -211,7 +211,7 @@ function LastDetails({ formData, addFormProperty }) {
   );
 }
 
-function NewTransactionPage({ splitter_name }) {
+function NewTransactionPage({ splitter_name, isMobile }) {
   const [users, setUsers] = useState([]);
   useEffect(() => getJson("users/" + splitter_name, setUsers), [splitter_name]);
 
@@ -237,27 +237,27 @@ function NewTransactionPage({ splitter_name }) {
     <>
       <h1>Add a New Transaction:</h1>
       <Grid container>
-        <Grid size={4}>
+        <Grid size={isMobile ? 12 : 4}>
           <InitialDetails
             users={users}
             formData={formData}
             addFormProperty={addFormProperty}
           />
         </Grid>
-        <Grid size={4}>
+        <Grid size={isMobile ? 12 : 4}>
           <BonusDetails formData={formData} addFormProperty={addFormProperty} />
         </Grid>
-        <Grid size={4}>
+        <Grid size={isMobile ? 12 : 4}>
           <LastDetails formData={formData} addFormProperty={addFormProperty} />
         </Grid>
-        <Grid size={8}>
+        <Grid size={isMobile ? 12 : 8}>
           <SplitsForm
             users={users}
             formData={formData}
             addFormProperty={addFormProperty}
           />
         </Grid>
-        <Grid size={4}>
+        <Grid size={isMobile ? 12 : 4}>
           <Button
             onClick={() =>
               handleResults(

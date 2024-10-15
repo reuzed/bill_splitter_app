@@ -155,7 +155,7 @@ function PaymentDetails({ formData, addFormProperty }) {
     </List>
   );
 }
-function NewUserPage({ splitter_name }) {
+function NewUserPage({ splitter_name, isMobile }) {
   const [users, setUsers] = useState([]);
   useEffect(() => getJson("users/" + splitter_name, setUsers), [splitter_name]);
 
@@ -165,7 +165,6 @@ function NewUserPage({ splitter_name }) {
     paying_description: "",
     account_number: "",
     sort_code: "",
-    account_number: "",
     IBAN_number: "",
     BIC_code: "",
   };
@@ -183,7 +182,8 @@ function NewUserPage({ splitter_name }) {
       <Typography variant="h3">Add a New User:</Typography>
       <Typography variant="body">
         Enter your details below. Name is required, but bank details can be
-        included if you want to be paid back more easily.
+        included if you want to be paid back more easily. (Don't enter bank
+        details if you are worried about security for the moment)
       </Typography>
       {/* <Typography variant="body2">
         Note: I have not implemented any security for sending bank details, so

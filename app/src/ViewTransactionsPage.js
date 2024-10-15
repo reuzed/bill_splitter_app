@@ -50,14 +50,14 @@ function MiniTable({ shares, users }) {
   );
 }
 
-function TransactionRow({ users, transaction, setRerender }) {
+function TransactionRow({ users, transaction, setRerender, isMobile }) {
   const [open, setOpen] = useState(false);
   return (
     <TableRow>
       <TableCell>{transaction.payer}</TableCell>
       <TableCell>{transaction.title}</TableCell>
       <TableCell>{Pounds.format(transaction.amount)}</TableCell>
-      <TableCell>{transaction.date}</TableCell>
+      {isMobile ? <></> : <TableCell>{transaction.date}</TableCell>}
       <TableCell>
         <IconButton onClick={() => setOpen(!open)}>
           {open ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
@@ -66,25 +66,29 @@ function TransactionRow({ users, transaction, setRerender }) {
           <MiniTable users={users} shares={transaction.shares} />
         </Collapse>
       </TableCell>
-      <TableCell>
-        <Button
-          onClick={() => {
-            console.log(transaction);
-            console.log(
-              "trying to delete a transaction with id " +
-                transaction.transaction_id
-            );
-            deleteTransaction(transaction.transaction_id, "debug");
-            setRerender((x) => x + 1);
-          }}
-        >
-          Delete
-        </Button>
-      </TableCell>
+      {isMobile ? (
+        <></>
+      ) : (
+        <TableCell>
+          <Button
+            onClick={() => {
+              console.log(transaction);
+              console.log(
+                "trying to delete a transaction with id " +
+                  transaction.transaction_id
+              );
+              deleteTransaction(transaction.transaction_id, "debug");
+              setRerender((x) => x + 1);
+            }}
+          >
+            Delete
+          </Button>
+        </TableCell>
+      )}
     </TableRow>
   );
 }
-function ViewTransactionsPage({ splitter_name }) {
+function ViewTransactionsPage({ splitter_name, isMobile }) {
   const [rerender, setRerender] = useState(0);
 
   const [users, setUsers] = useState({});
@@ -101,6 +105,7 @@ function ViewTransactionsPage({ splitter_name }) {
       users={users}
       transaction={transaction}
       setRerender={setRerender}
+      isMobile={isMobile}
     />
   ));
   return (
@@ -109,12 +114,24 @@ function ViewTransactionsPage({ splitter_name }) {
       <Grid container direction="column" alignItems="center" justify="center">
         <Table>
           <TableRow>
-            <TableCell>Payer</TableCell>
-            <TableCell>Title</TableCell>
-            <TableCell>Amount</TableCell>
-            <TableCell>Date</TableCell>
-            <TableCell>Shares</TableCell>
-            <TableCell>Delete</TableCell>
+            {isMobile ? (
+              <>
+                <TableCell>Payer</TableCell>
+                <TableCell>Title</TableCell>
+                <TableCell>Amount</TableCell>
+                <TableCell>Shares</TableCell>
+              </>
+            ) : (
+              <>
+                {" "}
+                <TableCell>Payer</TableCell>
+                <TableCell>Title</TableCell>
+                <TableCell>Amount</TableCell>
+                <TableCell>Date</TableCell>
+                <TableCell>Shares</TableCell>
+                <TableCell>Delete</TableCell>
+              </>
+            )}
           </TableRow>
           {transactionRows}
         </Table>

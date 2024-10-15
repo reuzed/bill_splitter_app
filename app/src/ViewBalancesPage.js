@@ -12,7 +12,7 @@ import BalancesGraph from "./BalancesGraph";
 
 import Grid from "@mui/material/Grid2";
 
-function ViewBalancesPage({ splitter_name }) {
+function ViewBalancesPage({ splitter_name, isMobile }) {
   const [users, setUsers] = useState([]);
   useEffect(() => getJson("users/" + splitter_name, setUsers), [splitter_name]);
   const [balances, setBalances] = useState({});
@@ -49,7 +49,7 @@ function ViewBalancesPage({ splitter_name }) {
     <>
       <h1>View Balances Below:</h1>
       <Grid container spacing={2}>
-        <Grid size={6} alignItems="center" justify="center">
+        <Grid size={isMobile ? 12 : 6} alignItems="center" justify="center">
           <Table>
             <TableHead>
               <TableRow>
@@ -60,7 +60,7 @@ function ViewBalancesPage({ splitter_name }) {
             {balance_rows}
           </Table>
         </Grid>
-        <Grid size={6} alignItems="center" justify="center">
+        <Grid size={isMobile ? 12 : 6} alignItems="center" justify="center">
           <BalancesGraph users={users} balances={balances} />
         </Grid>
       </Grid>

@@ -23,18 +23,40 @@ const page_data = [
   { page_name: "view_balances", label: "View Balances", icon: <BalanceIcon /> },
 ];
 
-function PageSelector({ setPage, splitter_name, setSplitter_name }) {
-  const [tempName, setTempName] = useState(splitter_name);
+function SplitterChanger({ splitter_name, setSplitter_name }) {
   const [editable, setEditable] = useState(true); //This is ! of what it should be but can't be bothered to fix
   useEffect(() => {
     if (editable) {
       setSplitter_name(tempName);
     }
   }, [editable]);
+  const [tempName, setTempName] = useState(splitter_name);
+  return (
+    <Grid container direction="column" sx={{ textAlign: "left" }}>
+      <Grid item>
+        <Typography variant="body2">Splitter Name:</Typography>
+      </Grid>
+      <Grid item>
+        <IconButton color="black" onClick={() => setEditable(!editable)}>
+          {editable ? <EditOffIcon /> : <EditIcon />}
+        </IconButton>
+        <input
+          className={editable ? "transparentInput blackText" : ""}
+          size={10}
+          disabled={editable}
+          type="text"
+          value={tempName}
+          onChange={(event) => setTempName(event.target.value)}
+        />
+      </Grid>
+    </Grid>
+  );
+}
+function PageSelector({ setPage, splitter_name, setSplitter_name, isMobile }) {
   return (
     <Grid container className="pageSelector">
-      <Grid size={2}></Grid>
-      <Grid size={8}>
+      <Grid size={isMobile ? 4 : 2}></Grid>
+      <Grid size={isMobile ? 4 : 8}>
         {page_data.map((page) => (
           <Tooltip title={page.label}>
             <IconButton onClick={() => setPage(page.page_name)}>
@@ -43,28 +65,11 @@ function PageSelector({ setPage, splitter_name, setSplitter_name }) {
           </Tooltip>
         ))}
       </Grid>
-      <Grid size={2}>
-        <Grid container direction="vertical" justifyContent={"left"}>
-          <Grid item>
-            <Typography variant="body2">Splitter Name:</Typography>
-          </Grid>
-          <Grid item>
-            <IconButton color="black" onClick={() => setEditable(!editable)}>
-              {editable ? <EditOffIcon /> : <EditIcon />}
-            </IconButton>
-            <input
-              className={
-                editable
-                  ? "transparentInput blackText"
-                  : "transparentInput redText"
-              }
-              disabled={editable}
-              type="text"
-              value={tempName}
-              onChange={(event) => setTempName(event.target.value)}
-            />
-          </Grid>
-        </Grid>
+      <Grid size={isMobile ? 4 : 2}>
+        <SplitterChanger
+          splitter_name={splitter_name}
+          setSplitter_name={setSplitter_name}
+        />
       </Grid>
     </Grid>
   );
