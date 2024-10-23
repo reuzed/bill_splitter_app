@@ -332,9 +332,6 @@ def debugpopulate():
     add_user(data2)
     delete_user(3, "debug")
     return "Successfully populated database."
-
-
-    
     
 if __name__ == '__main__':
     app.run(port=5000)
